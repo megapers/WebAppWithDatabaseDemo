@@ -47,10 +47,11 @@ jobs:
   - task: SonarCloudPrepare@1
     displayName: 'Prepare analysis on SonarCloud'
     inputs:
-      SonarCloud: SonarCloud
-      organization: houssemdellai
-      projectKey: WebAppWithDatabaseDemo
-  
+      SonarCloud: 'SonarCloud-Connection'
+      organization: 'megapers0194'
+      projectKey: 'WebAppWithDatabaseDemo'
+      projectName: 'WebAppWithDatabaseDemo'
+
   - task: DotNetCoreCLI@2
     displayName: Build
     inputs:
