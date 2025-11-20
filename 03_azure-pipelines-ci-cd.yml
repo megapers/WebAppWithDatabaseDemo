@@ -290,15 +290,8 @@ stages:
             --parameters location='canadacentral' `
             --mode Complete
 
-    - task: AzSKSVTs@4
-      displayName: Scan Azure Resources
-      enabled: ${{ parameters.runCompletePipeline }}
-      continueOnError: true
-      inputs:
-        ConnectedServiceNameARM: 'azure-connection'
-        GenerateMethodParameterSetSelection: 'ResourceGroupName'
-        ResourceGroupName: '$(ResourceGroupName)'
-        EnableGSSscan: true
+    # AzSK SVTs (Security Verification Tests) has been deprecated
+    # Consider using Azure Policy or Microsoft Defender for Cloud for security scanning
 
   - job: Deploy_DEV
     displayName: Deploy Apps to DEV
