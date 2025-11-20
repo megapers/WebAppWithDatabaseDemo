@@ -1,0 +1,14 @@
+# PSRule for Azure configuration
+# This file configures PSRule to properly scan Bicep templates
+
+configuration:
+  AZURE_BICEP_FILE_EXPANSION: true
+  AZURE_BICEP_FILE_EXPANSION_TIMEOUT: 10
+
+input:
+  pathIgnore:
+    - '*.json'      # Ignore ARM JSON templates
+    - '*.md'        # Ignore markdown files
+    - '*.yml'       # Ignore YAML files
+    - '*.yaml'      # Ignore YAML files
+    - 'results/'    # Ignore test results folder
