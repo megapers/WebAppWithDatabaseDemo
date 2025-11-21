@@ -15,11 +15,13 @@ namespace WebApp.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Rendering Home/Index view");
             return View();
         }
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("Rendering Privacy view");
             return View();
         }
 
