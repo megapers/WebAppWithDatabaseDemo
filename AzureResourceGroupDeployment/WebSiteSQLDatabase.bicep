@@ -22,7 +22,7 @@ param skuName string = 'F1'
 param skuCapacity int = 1
 
 @description('The administrator username for SQL Server')
-param administratorLogin string
+param administratorLogin string = 'azureadmin'
 
 @description('The administrator password for SQL Server')
 @secure()
@@ -58,7 +58,7 @@ param maxSizeBytes string = '1073741824'
 param requestedServiceObjectiveName string = 'Basic'
 
 @description('The name of the Web App')
-param webSiteName string
+param webSiteName string = 'megapers-webapp'
 
 @description('The name of the SQL Server')
 param sqlserverName string = 'megapers-sql'
