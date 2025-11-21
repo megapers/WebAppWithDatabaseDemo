@@ -80,7 +80,7 @@ stages:
       inputs:
         SonarCloud: SonarCloud-Connection
         organization: megapers0194
-        scannerMode: 'MSBuild'
+        scannerMode: 'dotnet'
         projectKey: WebAppWithDatabaseDemo
 
     - task: DotNetCoreCLI@2
@@ -156,7 +156,8 @@ stages:
       displayName: Restore NuGet Packages for SeleniumUiTests
       inputs:
         command: 'restore'
-        restoreSolution: 'SeleniumUiTests/SeleniumUiTests.csproj'
+        restoreSolution: 'SeleniumUiTests/packages.config'
+        restoreDirectory: 'packages'
 
     - task: MSBuild@1
       displayName: Build SeleniumUiTests.csproj
