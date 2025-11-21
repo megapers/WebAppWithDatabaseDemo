@@ -12,6 +12,7 @@ input:
     - '*.yml'       # Ignore YAML files
     - '*.yaml'      # Ignore YAML files
     - 'results/'    # Ignore test results folder
+    - '*.bicep'     # Ignore .bicep files (use .bicepparam instead for validation with parameters)
 
 # Suppress rules not applicable for dev/learning environment
 rule:
