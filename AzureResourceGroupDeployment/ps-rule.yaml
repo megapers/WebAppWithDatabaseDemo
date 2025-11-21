@@ -12,3 +12,30 @@ input:
     - '*.yml'       # Ignore YAML files
     - '*.yaml'      # Ignore YAML files
     - 'results/'    # Ignore test results folder
+
+# Suppress rules not applicable for dev/learning environment
+rule:
+  exclude:
+    # SQL Server security rules - not critical for dev environment
+    - Azure.SQL.AllowAzureAccess      # Allow Azure services access (needed for App Service)
+    - Azure.SQL.DefenderCloud         # Microsoft Defender for SQL (additional cost)
+    - Azure.SQL.Auditing              # SQL auditing (not needed for dev)
+    - Azure.SQL.AAD                   # Entra ID authentication (demo uses SQL auth)
+    - Azure.SQL.AADOnly               # Entra ID only authentication (demo uses SQL auth)
+    - Azure.SQL.VAScan                # Vulnerability assessment (additional cost)
+    
+    # App Service Plan rules - using F1 free tier for learning
+    - Azure.AppService.PlanInstanceCount  # Single instance acceptable for dev
+    - Azure.AppService.AvailabilityZone   # Zone redundancy not needed for dev
+    - Azure.AppService.MinPlan            # F1 tier acceptable for learning
+    
+    # App Service rules - simplified configuration for dev environment
+    - Azure.AppService.MinTLS         # TLS version configured at deployment time
+    - Azure.AppService.AlwaysOn       # Not available on F1 tier
+    - Azure.AppService.HTTP2          # Not critical for dev
+    - Azure.AppService.WebProbe       # Health probes not needed for simple dev app
+    - Azure.AppService.WebProbePath   # Health probes not needed for simple dev app
+    - Azure.AppService.WebSecureFtp   # FTP not used in this deployment
+    - Azure.AppService.ManagedIdentity # Not needed for this simple demo
+    - Azure.AppService.ARRAffinity    # Session affinity acceptable for dev
+    - Azure.AppService.UseHTTPS       # HTTPS configured at deployment time

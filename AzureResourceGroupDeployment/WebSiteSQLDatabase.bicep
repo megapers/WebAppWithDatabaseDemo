@@ -29,7 +29,7 @@ param administratorLogin string
 param administratorLoginPassword string
 
 @description('The name of the SQL Database')
-param databaseName string
+param databaseName string = 'EmployeesDB'
 
 @description('The collation for the SQL Database')
 param collation string = 'SQL_Latin1_General_CP1_CI_AS'
