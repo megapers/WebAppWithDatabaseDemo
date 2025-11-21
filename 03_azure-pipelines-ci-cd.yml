@@ -74,12 +74,13 @@ stages:
                 }
         workingDirectory: 'WebApp'
 
-    - task: SonarCloudPrepare@1
+    - task: SonarCloudPrepare@2
       displayName: Prepare analysis on SonarCloud
       enabled: ${{ parameters.runCompletePipeline }}
       inputs:
         SonarCloud: SonarCloud-Connection
         organization: megapers0194
+        scannerMode: 'MSBuild'
         projectKey: WebAppWithDatabaseDemo
 
     - task: DotNetCoreCLI@2
@@ -104,11 +105,11 @@ stages:
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
         zipAfterPublish: True
 
-    - task: SonarCloudAnalyze@1
+    - task: SonarCloudAnalyze@2
       displayName: Run Code Analysis
       enabled: ${{ parameters.runCompletePipeline }}
 
-    - task: SonarCloudPublish@1
+    - task: SonarCloudPublish@2
       displayName: Publish Quality Gate Result
       enabled: ${{ parameters.runCompletePipeline }}
 
@@ -311,13 +312,15 @@ stages:
         itemPattern: '**/WebApp.zip'
         downloadPath: '$(System.DefaultWorkingDirectory)'
 
-    - task: AzureRmWebAppDeployment@3
+    - task: AzureRmWebAppDeployment@4
       displayName: Deploy WebApp to Azure
       inputs:
         azureSubscription: 'azure-connection'
-        appType: 'app'
+        appType: 'webApp'
         WebAppName: '$(WebAppName)'
         Package: '$(System.DefaultWorkingDirectory)/drop/WebApp.zip'
+        enableCustomDeployment: true
+        DeploymentType: 'zipDeploy'
         TakeAppOfflineFlag: true
         JSONFiles: '**/appsettings.json'
 

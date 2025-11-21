@@ -61,7 +61,7 @@ param requestedServiceObjectiveName string = 'Basic'
 param webSiteName string
 
 @description('The name of the SQL Server')
-param sqlserverName string
+param sqlserverName string = 'megapers-sql'
 
 @description('The location for all resources')
 param location string = resourceGroup().location
