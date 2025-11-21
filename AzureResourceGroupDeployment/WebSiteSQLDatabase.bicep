@@ -1,5 +1,5 @@
 @description('The name of the App Service Plan')
-param hostingPlanName string
+param hostingPlanName string = 'megapers-service-plan'
 
 @description('The pricing tier for the App Service Plan')
 @allowed([
