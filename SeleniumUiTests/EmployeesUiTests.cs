@@ -4,8 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace SeleniumUiTests
 {
@@ -31,8 +29,6 @@ namespace SeleniumUiTests
         public void CreateEmployee(string fullname, string department, string email, string phone, string address)
         {
             // Arrange
-            // Automatically download and configure the correct ChromeDriver version
-            new DriverManager().SetUpDriver(new ChromeConfig());
             _browserDriver = new ChromeDriver();
             _browserDriver.Manage().Window.Maximize();
             _browserDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);

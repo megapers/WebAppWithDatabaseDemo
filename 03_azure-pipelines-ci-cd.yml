@@ -74,7 +74,7 @@ stages:
                 }
         workingDirectory: 'WebApp'
 
-    - task: SonarCloudPrepare@2
+    - task: SonarCloudPrepare@3
       displayName: Prepare analysis on SonarCloud
       enabled: ${{ parameters.runCompletePipeline }}
       inputs:
@@ -105,11 +105,11 @@ stages:
         arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
         zipAfterPublish: True
 
-    - task: SonarCloudAnalyze@2
+    - task: SonarCloudAnalyze@3
       displayName: Run Code Analysis
       enabled: ${{ parameters.runCompletePipeline }}
 
-    - task: SonarCloudPublish@2
+    - task: SonarCloudPublish@3
       displayName: Publish Quality Gate Result
       enabled: ${{ parameters.runCompletePipeline }}
 
@@ -148,9 +148,15 @@ stages:
       displayName: Use NuGet 4.3.0
 
     - task: NuGetCommand@2
-      displayName: Restoore NuGet Packages
+      displayName: Restore NuGet Packages
       inputs:
         restoreSolution: WebAppWithDatabase.sln
+
+    - task: NuGetCommand@2
+      displayName: Restore NuGet Packages for SeleniumUiTests
+      inputs:
+        command: 'restore'
+        restoreSolution: 'SeleniumUiTests/SeleniumUiTests.csproj'
 
     - task: MSBuild@1
       displayName: Build SeleniumUiTests.csproj
