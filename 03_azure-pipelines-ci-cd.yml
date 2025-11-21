@@ -148,22 +148,22 @@ stages:
       displayName: Use NuGet 4.3.0
 
     - task: NuGetCommand@2
-      displayName: Restore NuGet Packages
+      displayName: Restore NuGet Packages  
       inputs:
         restoreSolution: WebAppWithDatabase.sln
-
+        
     - task: NuGetCommand@2
-      displayName: Restore NuGet Packages for SeleniumUiTests
+      displayName: Restore packages.config for Selenium
       inputs:
         command: 'restore'
         restoreSolution: 'SeleniumUiTests/packages.config'
-        restoreDirectory: 'packages'
+        restoreDirectory: '$(Build.SourcesDirectory)/packages'
 
     - task: MSBuild@1
       displayName: Build SeleniumUiTests.csproj
       inputs:
         solution: SeleniumUiTests/SeleniumUiTests.csproj
-        msbuildArguments: '/p:OutDir=$(Build.ArtifactStagingDirectory)'
+        msbuildArguments: '/p:OutDir=$(Build.ArtifactStagingDirectory) /p:RestorePackages=false'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: UI-Test'
